@@ -1,7 +1,7 @@
 require_relative '../models/address_book'
 
  RSpec.describe AddressBook do
-   let(:book) { AddressBook.new}
+   let(:book) { AddressBook.new }
 
    def check_entry(entry, expected_name, expected_number, expected_email)
      expect(entry.name).to eq expected_name
@@ -82,6 +82,36 @@ require_relative '../models/address_book'
          check_entry(entry_five, "Sussie", "555-555-2036", "sussie@blocmail.com")
        end
      end
+
+     describe "#import_from_entries_2.csv" do
+          it "imports the correct number of entries" do
+            book.import_from_csv("entries_2.csv")
+            book_size = book.entries.size
+
+            expect(book_size).to eq 3
+          end
+
+        it "imports the 1st entry" do
+           book.import_from_csv("entries_2.csv")
+           entry_one = book.entries[0]
+
+           check_entry(entry_one, "Meggie", "609-878-6543", "cutiepie@gmail.com")
+         end
+
+       it "imports the 2nd entry" do
+          book.import_from_csv("entries_2.csv")
+
+          entry_two = book.entries[1]
+          check_entry(entry_two, "Denise", "732-998-7609", "nicemouse@yahoo.com")
+        end
+
+        it "imports the 3rd entry" do
+          book.import_from_csv("entries_2.csv")
+
+          entry_three = book.entries[2]
+          check_entry(entry_three, "Scott", "251-288-3287", "scottscharinger@gmail.com")
+        end
+      end
 
     describe "#remove_entry" do
        it "removes an entry using the name, phone_number, and email address" do
