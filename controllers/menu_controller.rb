@@ -14,7 +14,10 @@ require_relative '../models/address_book'
      puts "3 - Search for an entry"
      puts "4 - Import entries from a CSV"
      puts "5 - View Entry Number n"
-     puts "6 - Exit"
+     puts "6 - Delete an entry"
+     puts "7 - Edit an entry"
+     puts "8 - WARNING!!! DELETES, DESTROYS, AND DESSIMATES ALL ENTRIES"
+     puts "9 - Exit"
      print "Enter your selection: "
 
      selection = gets.to_i
@@ -41,6 +44,18 @@ require_relative '../models/address_book'
          search_entries_by_number
          main_menu
        when 6
+         system "clear"
+         delete_entry
+         main_menu
+       when 7
+         system "clear"
+         edit_entry
+         main_menu
+       when 8
+         system "clear"
+         nuke_entries_forever
+         main_menu
+       when 9
          puts "Good-bye!"
          exit(0)
        else
@@ -157,7 +172,7 @@ require_relative '../models/address_book'
      puts "e - edit this entry"
      puts "m - return to main menu"
      selection = gets.chomp
- 
+
      case selection
        when "d"
          system "clear"
@@ -198,5 +213,9 @@ require_relative '../models/address_book'
        puts "Updated entry:"
        puts entry
      end
+   end
+
+     address.book.entries.clear
+     puts "All entries gone forever. So sad."
    end
 end

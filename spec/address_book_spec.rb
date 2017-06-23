@@ -180,5 +180,12 @@ require_relative '../models/address_book'
       expect(entry).to be_nil
     end
   end
+
+  describe "#nuke_entries_forever" do
+    it "should delete all entries" do
+      book.nuke_entries_forever
+      expect(book.entries.size) to eq 0
+    end
+  end
 end
 end
